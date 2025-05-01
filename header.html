@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxe Cosmetics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== Base Styles ===== */
+        :root {
+            --black: #000000;
+            --gold: #D4AF37;
+            --light-gold: #FFD700;
+            --white: #ffffff;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        /* ===== Header Structure ===== */
+        .main-header {
+            background-color: var(--black);
+            color: var(--white);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+        
+        .container {
+            width: 95%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+        
+        /* ===== Logo Styles ===== */
+        .logo {
+            display: flex;
+            align-items: baseline;
+            z-index: 1001;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            color: var(--gold);
+            font-weight: 700;
+            letter-spacing: 2px;
+            transition: var(--transition);
+        }
+        
+        .logo span {
+            font-size: 0.9rem;
+            margin-left: 5px;
+            letter-spacing: 1px;
+        }
+        
+        /* ===== Mobile Menu Button ===== */
+        .mobile-menu-btn {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.8rem;
+            cursor: pointer;
+            display: block;
+            z-index: 1001;
+            transition: var(--transition);
+        }
+        
+        .mobile-menu-btn:hover {
+            color: var(--gold);
+        }
+        
+        /* ===== Navigation Styles ===== */
+        .main-nav {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 80%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(5px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: var(--transition);
+            z-index: 1000;
+        }
+        
+        .main-nav.active {
+            left: 0;
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .main-nav ul {
+            list-style: none;
+            padding: 0 30px;
+        }
+        
+        .main-nav li {
+            margin-bottom: 25px;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: var(--transition);
+        }
+        
+        .main-nav.active li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .main-nav.active li:nth-child(1) { transition-delay: 0.1s; }
+        .main-nav.active li:nth-child(2) { transition-delay: 0.2s; }
+        .main-nav.active li:nth-child(3) { transition-delay: 0.3s; }
+        .main-nav.active li:nth-child(4) { transition-delay: 0.4s; }
+        
+        .main-nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 500;
+            display: block;
+            padding: 8px 0;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .main-nav a:hover {
+            color: var(--gold);
+        }
+        
+        /* Cart Link Styles */
+        .cart-link {
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+        
+        .cart-count {
+            background-color: var(--gold);
+            color: var(--black);
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-left: 8px;
+            transition: var(--transition);
+        }
+        
+        /* ===== Tablet Styles (768px and up) ===== */
+        @media (min-width: 768px) {
+            .container {
+                height: 80px;
+            }
+            
+            .mobile-menu-btn {
+                display: none;
+            }
+            
+            .main-nav {
+                position: static;
+                width: auto;
+                height: auto;
+                background: transparent;
+                backdrop-filter: none;
+                flex-direction: row;
+                justify-content: flex-end;
+            }
+            
+            .main-nav ul {
+                display: flex;
+                align-items: center;
+                padding: 0;
+            }
+            
+            .main-nav li {
+                margin: 0 0 0 25px;
+                opacity: 1;
+                transform: none;
+            }
+            
+            .main-nav a {
+                font-size: 1rem;
+                padding: 5px 0;
+            }
+            
+            .main-nav a::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background-color: var(--gold);
+                transition: var(--transition);
+            }
+            
+            .main-nav a:hover::after {
+                width: 100%;
+            }
+            
+            .logo h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        /* ===== Desktop Styles (1024px and up) ===== */
+        @media (min-width: 1024px) {
+            .container {
+                height: 90px;
+            }
+            
+            .main-nav li {
+                margin-left: 35px;
+            }
+            
+            .main-nav a {
+                font-size: 1.1rem;
+            }
+            
+            .logo h1 {
+                font-size: 2.2rem;
+            }
+            
+            .logo span {
+                font-size: 1rem;
+            }
+        }
+        
+        /* ===== Large Desktop (1200px and up) ===== */
+        @media (min-width: 1200px) {
+            .main-nav li {
+                margin-left: 40px;
+            }
+        }
+        
+        /* ===== Header Scroll Effect ===== */
+        .main-header.scrolled {
+            height: 60px;
+            background-color: rgba(0, 0, 0, 0.95);
+        }
+        
+        .main-header.scrolled .container {
+            height: 60px;
+        }
+        
+        .main-header.scrolled .logo h1 {
+            font-size: 1.6rem;
+        }
+        
+        @media (min-width: 768px) {
+            .main-header.scrolled .logo h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header" id="mainHeader">
+        <div class="container">
+            <div class="logo">
+                <h1>LUXE</h1>
+                <span>Cosmetics</span>
+            </div>
+
+            <button class="mobile-menu-btn" id="menuBtn" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav class="main-nav" id="mainNav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li>
+                        <a href="cart.html" class="cart-link">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        menuBtn.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+            menuBtn.innerHTML = mainNav.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close menu when clicking on a link (mobile)
+        document.querySelectorAll('.main-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 768) {
+                    mainNav.classList.remove('active');
+                    menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+        });
+        
+        // Header scroll effect
+        const header = document.getElementById('mainHeader');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Initialize scroll state
+        if (window.scrollY > 50) header.classList.add('scrolled');
+    </script>
+</body>
+</html>

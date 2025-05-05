@@ -833,3 +833,28 @@ input[readonly] {
     margin-bottom: 5px;
     color: var(--primary-color);
 }
+/* Product Link Styling */
+.product-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.product-link:hover h3 {
+    color: var(--gold);
+}
+
+/* Back Button */
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 30px;
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.back-btn:hover {
+    color: var(--light-gold);
+}
